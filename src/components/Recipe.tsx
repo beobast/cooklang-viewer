@@ -3,11 +3,11 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Title = ({ title }: { title: string }) => {
-  return <h1>{title}</h1>;
+  return <h1 className="text-[#FD5523]">{title}</h1>;
 };
 
 const Description = ({ description }: { description: string | null }) => {
-  return description ? <p>{description}</p> : null;
+  return description ? <p className="text-[#356859]">{description}</p> : null;
 };
 
 const Tags = ({ tags }: { tags: string[] }) => {
@@ -48,9 +48,11 @@ const Instructions = ({ instructions }: { instructions: string | null }) => {
 
 const Ingredients = ({ ingredients }: { ingredients: Ingredient[] }) => {
   return (
-    <Card className="dark">
+    <Card className="min-w-fit h-fit mt-8 bg-[#e7efd8]">
       <CardHeader>
-        <CardTitle>Ingrédients</CardTitle>
+        <CardTitle className="text-[#356859] font-semibold">
+          INGREDIENTS
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <ul>
@@ -67,13 +69,15 @@ const Ingredients = ({ ingredients }: { ingredients: Ingredient[] }) => {
 
 const Recipe = ({ data }: { data: RecipeProp }) => {
   return (
-    <div className="prose">
+    <div className="prose mx-auto bg-[#FFFBE6]">
       <Title title={data.title} />
       <Description description={data.description} />
       <Tags tags={data.tags} />
       <Yields yields={data.yields} />
-      <Ingredients ingredients={data.ingredients} />
-      <Instructions instructions={data.instructions} />
+      <div className="flex gap-8 flex-col md:flex-row">
+        <Ingredients ingredients={data.ingredients} />
+        <Instructions instructions={data.instructions} />
+      </div>
     </div>
   );
 };
