@@ -1,20 +1,18 @@
 ---
+import slugify from "@sindresorhus/slugify";
 import Layout from "@/layouts/Layout.astro";
-import { getCollection, render } from "astro:content";
-import type { RecipeProp, Amount, Ingredient } from "@/lib/Recipedata";
-import MyRecipe from "@/components/Recipe";
+import { getCollection } from "astro:content";
+import Recipe from "@/components/Recipe";
 
 export async function getStaticPaths() {
   const recipes = await getCollection("recipes");
   return recipes.map((recipe) => ({
-    params: { slug: recipe.id },
+    params: { slug: slugify(recipe.data.title) },
     props: { data: recipe.data },
   }));
 }
-
-const { data: any } = Astro.props;
 ---
 
 <Layout>
-  <MyRecipe data={Astro.props.data} />
+  <Recipe data={Astro.props.data} />
 </Layout>

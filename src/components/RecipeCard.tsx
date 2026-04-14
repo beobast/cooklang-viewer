@@ -1,24 +1,16 @@
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import slugify from "@sindresorhus/slugify";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
 const RecipeCard = ({ data }: { data: any }) => {
-  const onClick = () => {};
-
   console.log(data);
 
   return (
-    <a href={`recipes/${data.id}`}>
-      <Card onClick={onClick}>
+    <a href={`recipes/${slugify(data.title)}`}>
+      <Card className="bg-[#B9E4C9]/20">
         <CardHeader>
-          <CardTitle>{data.title}</CardTitle>
-          <CardDescription>{data.description}</CardDescription>
+          <CardTitle className="text-[#356859] font-bold">
+            {data.title}
+          </CardTitle>
         </CardHeader>
       </Card>
     </a>

@@ -9,10 +9,16 @@ import { Recipe } from "recipemd";
 // 3. Import Zod
 import { z } from "astro/zod";
 
+/*const githubRepo = "tstehr/recipes";
+const githubBranch = "master";*/
+
+const githubRepo = "beobast/recettes";
+const githubBranch = "main";
+
 const recipes = defineCollection({
   loader: async () => {
     const response = await fetch(
-      `https://api.github.com/repos/beobast/recettes/git/trees/main?recursive=1`,
+      `https://api.github.com/repos/${githubRepo}/git/trees/${githubBranch}?recursive=1`,
     );
     const repo = await response.json();
 
@@ -24,7 +30,7 @@ const recipes = defineCollection({
     );
 
     const myrecipes: any[] = [];
-    const root = `https://raw.githubusercontent.com/beobast/recettes/main/`;
+    const root = `https://raw.githubusercontent.com/${githubRepo}/${githubBranch}/`;
 
     for (const element of recipeList) {
       const recipeURL = new URL(element.path, root).href;

@@ -1,61 +1,66 @@
+import markdownit from "markdown-it";
 import type { RecipeProp, Amount, Ingredient } from "@/lib/Recipedata";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+const md = markdownit({ linkify: true });
 
 const Title = ({ title }: { title: string }) => {
   return <h1 className="text-[#FD5523]">{title}</h1>;
 };
 
 const Description = ({ description }: { description: string | null }) => {
-  return description ? <p className="text-[#356859]">{description}</p> : null;
+  return description ? (
+    <div
+      className="text-[#356859]"
+      dangerouslySetInnerHTML={{ __html: md.render(description) }}
+    ></div>
+  ) : null;
 };
 
 const Tags = ({ tags }: { tags: string[] }) => {
-  return (
-    <div className="flex gap-2">
+  return tags.length ? (
+    <p>
       {tags.map((t) => (
-        <Badge variant="secondary">{t}</Badge>
+        <Badge variant="secondary" className="mr-2">
+          {t}
+        </Badge>
       ))}
-    </div>
-  );
+    </p>
+  ) : null;
 };
 
 const Yields = ({ yields }: { yields: Amount[] }) => {
-  return (
-    <ul>
+  return yields.length ? (
+    <p>
       {yields.map((t) => (
-        <p>
+        <Badge variant="default">
           {t.factor} {t.unit}
-        </p>
+        </Badge>
       ))}
-    </ul>
-  );
+    </p>
+  ) : null;
 };
 
 const Instructions = ({ instructions }: { instructions: string | null }) => {
-  if (!instructions) return null;
-  return (
-    <ol>
-      {instructions
-        .split("\n\n")
-        .filter((x) => x)
-        .map((l) => (
-          <li>{l}</li>
-        ))}
-    </ol>
-  );
+  return instructions ? (
+    <div
+      className="text-[#356859]"
+      dangerouslySetInnerHTML={{ __html: md.render(instructions) }}
+    ></div>
+  ) : null;
 };
 
 const Ingredients = ({ ingredients }: { ingredients: Ingredient[] }) => {
   return (
-    <Card className="min-w-fit h-fit mt-8 bg-[#e7efd8]">
+    <Card className="min-w-38 w-fit h-fit mt-2 bg-[#e7efd8]">
       <CardHeader>
-        <CardTitle className="text-[#356859] font-semibold">
+        <CardTitle className="text-[#356859] font-semibold text-center">
           INGREDIENTS
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <ul>
+        <ul className="text-base list-none px-0 my-0">
           {ingredients.map((i) => (
             <li>
               {i.amount?.factor} {i.amount?.unit} {i.name}
@@ -69,12 +74,12 @@ const Ingredients = ({ ingredients }: { ingredients: Ingredient[] }) => {
 
 const Recipe = ({ data }: { data: RecipeProp }) => {
   return (
-    <div className="prose mx-auto bg-[#FFFBE6]">
+    <div className="prose mx-auto">
       <Title title={data.title} />
       <Description description={data.description} />
       <Tags tags={data.tags} />
       <Yields yields={data.yields} />
-      <div className="flex gap-8 flex-col md:flex-row">
+      <div className="flex gap-4 flex-col">
         <Ingredients ingredients={data.ingredients} />
         <Instructions instructions={data.instructions} />
       </div>

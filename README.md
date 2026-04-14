@@ -1,46 +1,14 @@
-# Astro Starter Kit: Basics
+# Recipe Viewer
 
-```sh
-pnpm create astro@latest -- --template basics
-```
+[Thinking About Recipe Formats More Than Anyone Should](https://rknight.me/blog/thinking-about-recipe-formats-more-than-anyone-should/)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+[RecipeMD](https://recipemd.org/)
 
-## 🚀 Project Structure
+Formats:
 
-Inside of your Astro project, you'll see the following folders and files:
+- [h-recipe](https://microformats.org/wiki/h-recipe)
+- [Schema.org Recipe Type](https://schema.org/Recipe)
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+Parsing recipe from URL
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Put cook.md/ before the url
