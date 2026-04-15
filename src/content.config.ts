@@ -1,5 +1,6 @@
 // 1. Import utilities from `astro:content`
 import { defineCollection } from "astro:content";
+import { glob } from "astro/loaders";
 //import { Recipe } from "@tmlmt/cooklang-parser";
 import { Recipe } from "recipemd";
 
@@ -52,5 +53,8 @@ const recipes = defineCollection({
   }),*/
 });
 
+const recettes = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./recettes/" }),
+});
 // 5. Export a single `collections` object to register your collection(s)
-export const collections = { recipes };
+export const collections = { recipes, recettes };
