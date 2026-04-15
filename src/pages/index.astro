@@ -16,7 +16,7 @@ console.log(recettes);
         {allRecipes.map((recipe) => <RecipeCard data={recipe.data} />)}
         {
             recettes.map((recipe) => (
-                <MyRecipeCard client:only="react" data={recipe.body} />
+                <MyRecipeCard client:only="react" markdown={recipe.body} />
             ))
         }
     </div>

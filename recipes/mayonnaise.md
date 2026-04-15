@@ -1,5 +1,5 @@
 ---
-source: url
+source: https://www.marmiton.org/recettes/recette_mayonnaise-maison_26184.aspx
 servings: 4
 prepTime: 10 min
 cookTime: 25 min
@@ -8,11 +8,13 @@ restTime: 1 h 30
 
 # Mayonnaise
 
-Courte description
+Courte *description*
+
+ligne 2
 
 ## Ingrédients
 
-- 2 jaunes d'oeufs
+- 2 jaunes d'œufs
 - 15 g de moutarde de Dijon
 - 2 cc de vinaigre d'alcool blanc
 - sel
@@ -23,3 +25,7 @@ Courte description
 
 1. Dans un grand bol ou un cul-de-poule, fouettez énergiquement les jaunes d'oeufs avec la moutarde, puis le vinaigre et enfin le sel et le poivre.
 2. Sans cesser de fouetter, incorporez l'huile en filet.
+
+## Notes
+
+Choisissez des œufs frais dont le n° 0 inscrit sur la coquille certifie une agriculture bio et un élevage en plein air plus respecteux des animaux.

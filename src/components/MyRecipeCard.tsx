@@ -1,11 +1,9 @@
 import parseRecipe from "@/lib/RecipeParser";
-import ReactJsonView from "@microlink/react-json-view";
 
-const MyRecipeCard = ({ data }: { data: any }) => {
-  const tree = parseRecipe(data);
+const MyRecipeCard = ({ markdown }: { markdown: string | undefined }) => {
+  const tree = parseRecipe(markdown);
   console.log(tree);
-
-  return <ReactJsonView src={tree} />;
+  return <p>lol</p>;
 };
 
 export default MyRecipeCard;
