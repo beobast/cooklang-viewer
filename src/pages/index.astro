@@ -5,7 +5,7 @@ import Layout from "@/layouts/Layout.astro";
 
 import { getCollection } from "astro:content";
 
-const allRecipes = await getCollection("recipes");
+//const allRecipes = await getCollection("recipes");
 
 const recettes = await getCollection("recettes");
 console.log(recettes);
@@ -13,10 +13,14 @@ console.log(recettes);
 
 <Layout>
     <div class="flex flex-col gap-2 sm:gap-4 max-w-xl mx-auto">
-        {allRecipes.map((recipe) => <RecipeCard data={recipe.data} />)}
+        {/*allRecipes.map((recipe) => <RecipeCard data={recipe.data} />)*/}
         {
             recettes.map((recipe) => (
-                <MyRecipeCard client:only="react" markdown={recipe.body} />
+                <MyRecipeCard
+                    client:only="react"
+                    data={recipe}
+                    markdown={recipe.body}
+                />
             ))
         }
     </div>

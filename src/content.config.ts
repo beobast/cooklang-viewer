@@ -57,4 +57,4 @@ const recettes = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./recipes/" }),
 });
 // 5. Export a single `collections` object to register your collection(s)
-export const collections = { recipes, recettes };
+export const collections = { recettes };

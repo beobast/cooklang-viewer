@@ -73,6 +73,7 @@ const Ingredients = ({ ingredients }: { ingredients: Ingredient[] }) => {
 };
 
 const Recipe = ({ data }: { data: RecipeProp }) => {
+  return <p>toto</p>;
   return (
     <div className="prose mx-auto">
       <Title title={data.title} />

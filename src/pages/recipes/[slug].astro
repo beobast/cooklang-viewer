@@ -5,14 +5,14 @@ import { getCollection } from "astro:content";
 import Recipe from "@/components/Recipe";
 
 export async function getStaticPaths() {
-  const recipes = await getCollection("recipes");
-  return recipes.map((recipe) => ({
-    params: { slug: slugify(recipe.data.title) },
-    props: { data: recipe.data },
-  }));
+    const recipes = await getCollection("recettes");
+    return recipes.map((recipe) => ({
+        params: { slug: recipe.id },
+        props: { data: recipe.data },
+    }));
 }
 ---
 
 <Layout>
-  <Recipe data={Astro.props.data} />
+    <Recipe data={Astro.props.data} />
 </Layout>
