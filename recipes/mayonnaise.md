@@ -1,9 +1,5 @@
 ---
-source: https://www.marmiton.org/recettes/recette_mayonnaise-maison_26184.aspx
-servings: 4
-prepTime: 10 min
-cookTime: 25 min
-restTime: 1 h 30
+title: Mayonnaise 
 ---
 
 # Mayonnaise

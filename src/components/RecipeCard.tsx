@@ -1,13 +1,13 @@
-import slugify from "@sindresorhus/slugify";
+import type { CollectionEntry } from "astro:content";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
-const RecipeCard = ({ data }: { data: any }) => {
+const RecipeCard = ({ recipe }: { recipe: CollectionEntry<"recipes"> }) => {
   return (
-    <a href={`recipes/${slugify(data.title)}`}>
+    <a href={`recipes/${recipe.id}`}>
       <Card className="bg-[#B9E4C9]/20">
         <CardHeader>
           <CardTitle className="text-[#356859] font-bold">
-            {data.title}
+            {recipe.data.title}
           </CardTitle>
         </CardHeader>
       </Card>

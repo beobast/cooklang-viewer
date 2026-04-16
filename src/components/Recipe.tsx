@@ -42,16 +42,17 @@ const Yields = ({ yields }: { yields: Amount[] }) => {
   ) : null;
 };
 
-const Instructions = ({ instructions }: { instructions: string | null }) => {
-  return instructions ? (
-    <div
-      className="text-[#356859]"
-      dangerouslySetInnerHTML={{ __html: md.render(instructions) }}
-    ></div>
-  ) : null;
+const Instructions = ({ instructions }: { instructions: string[] }) => {
+  return (
+    <ol className="text-[#356859] text-base list-none px-0 my-0">
+      {instructions.map((instruction, index) => (
+        <li key={index}>{instruction}</li>
+      ))}
+    </ol>
+  );
 };
 
-const Ingredients = ({ ingredients }: { ingredients: Ingredient[] }) => {
+const Ingredients = ({ ingredients }: { ingredients: string[] }) => {
   return (
     <Card className="min-w-38 w-fit h-fit mt-2 bg-[#e7efd8]">
       <CardHeader>
@@ -61,10 +62,8 @@ const Ingredients = ({ ingredients }: { ingredients: Ingredient[] }) => {
       </CardHeader>
       <CardContent>
         <ul className="text-base list-none px-0 my-0">
-          {ingredients.map((i) => (
-            <li>
-              {i.amount?.factor} {i.amount?.unit} {i.name}
-            </li>
+          {ingredients.map((ingredient, index) => (
+            <li key={index}>{ingredient}</li>
           ))}
         </ul>
       </CardContent>
@@ -72,17 +71,17 @@ const Ingredients = ({ ingredients }: { ingredients: Ingredient[] }) => {
   );
 };
 
-const Recipe = ({ data }: { data: RecipeProp }) => {
-  return <p>toto</p>;
+const Recipe = ({ recipe }: { recipe: any }) => {
+  console.log("received recipe");
   return (
     <div className="prose mx-auto">
-      <Title title={data.title} />
-      <Description description={data.description} />
-      <Tags tags={data.tags} />
-      <Yields yields={data.yields} />
+      <Title title={recipe.title} />
+      <Description description={recipe.description} />
+      {/*<Tags tags={data.tags} />
+      <Yields yields={data.yields} />*/}
       <div className="flex gap-4 flex-col">
-        <Ingredients ingredients={data.ingredients} />
-        <Instructions instructions={data.instructions} />
+        <Ingredients ingredients={recipe.ingredients} />
+        <Instructions instructions={recipe.instructions} />
       </div>
     </div>
   );

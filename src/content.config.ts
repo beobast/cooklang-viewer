@@ -1,18 +1,15 @@
 // 1. Import utilities from `astro:content`
 import { defineCollection } from "astro:content";
-import { glob } from "astro/loaders";
-//import { Recipe } from "@tmlmt/cooklang-parser";
-import { Recipe } from "recipemd";
+//import { Recipe } from "recipemd";
 
 // 2. Import loader(s)
-//import { glob } from "astro/loaders";
+import { glob } from "astro/loaders";
 
 // 3. Import Zod
 import { z } from "astro/zod";
 
-/*const githubRepo = "tstehr/recipes";
-const githubBranch = "master";*/
-
+// Fetch from github repo
+/*
 const githubRepo = "beobast/recettes";
 const githubBranch = "main";
 
@@ -48,13 +45,14 @@ const recipes = defineCollection({
     // or an object with IDs as keys and entries as values
     return myrecipes;
   },
-  /*schema: z.object({
-    title: z.string(),
-  }),*/
 });
+*/
 
-const recettes = defineCollection({
+const recipes = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./recipes/" }),
+  schema: z.object({
+    title: z.string(),
+  }),
 });
 // 5. Export a single `collections` object to register your collection(s)
-export const collections = { recettes };
+export const collections = { recipes };
