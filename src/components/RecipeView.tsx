@@ -1,11 +1,11 @@
 import markdownit from "markdown-it";
-import type { RecipeProp, Amount, Ingredient } from "@/lib/Recipedata";
+import type { Recipe } from "@/lib/RecipeTypes";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const md = markdownit({ linkify: true });
 
-const Title = ({ title }: { title: string }) => {
+const Title = ({ title }: { title: string | null }) => {
   return <h1 className="text-[#FD5523]">{title}</h1>;
 };
 
@@ -24,18 +24,6 @@ const Tags = ({ tags }: { tags: string[] }) => {
       {tags.map((t) => (
         <Badge variant="secondary" className="mr-2">
           {t}
-        </Badge>
-      ))}
-    </p>
-  ) : null;
-};
-
-const Yields = ({ yields }: { yields: Amount[] }) => {
-  return yields.length ? (
-    <p>
-      {yields.map((t) => (
-        <Badge variant="default">
-          {t.factor} {t.unit}
         </Badge>
       ))}
     </p>
@@ -71,14 +59,11 @@ const Ingredients = ({ ingredients }: { ingredients: string[] }) => {
   );
 };
 
-const Recipe = ({ recipe }: { recipe: any }) => {
-  console.log("received recipe");
+const RecipeView = ({ recipe }: { recipe: Recipe }) => {
   return (
     <div className="prose mx-auto">
       <Title title={recipe.title} />
       <Description description={recipe.description} />
-      {/*<Tags tags={data.tags} />
-      <Yields yields={data.yields} />*/}
       <div className="flex gap-4 flex-col">
         <Ingredients ingredients={recipe.ingredients} />
         <Instructions instructions={recipe.instructions} />
@@ -87,4 +72,4 @@ const Recipe = ({ recipe }: { recipe: any }) => {
   );
 };
 
-export default Recipe;
+export default RecipeView;

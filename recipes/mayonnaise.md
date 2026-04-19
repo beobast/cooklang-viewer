@@ -1,14 +1,10 @@
----
-title: Mayonnaise 
----
-
 # Mayonnaise
 
-Courte *description*
+Courte description
 
-ligne 2
+*servings 4*
 
-## Ingrédients
+## Ingredients
 
 - 2 jaunes d'œufs
 - 15 g de moutarde de Dijon
@@ -17,7 +13,7 @@ ligne 2
 - poivre
 - 20 cl d'huile de tournesol
 
-## Préparation
+## Instructions
 
 1. Dans un grand bol ou un cul-de-poule, fouettez énergiquement les *jaunes* d'oeufs avec la moutarde, puis le vinaigre et enfin le sel et le poivre.
 2. Sans cesser de fouetter, incorporez l'huile en filet.

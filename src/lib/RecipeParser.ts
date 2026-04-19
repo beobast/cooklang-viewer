@@ -1,13 +1,14 @@
 import markdownit from "markdown-it";
+import type { Recipe } from "@/lib/RecipeTypes";
 
 const md = markdownit();
 
-const parseRecipe = (markdown: string | undefined) => {
+const parseRecipe = (markdown: string | undefined): Recipe => {
   let title = null;
-  let description = "";
+  let description = null;
   let ingredients = [];
   let instructions = [];
-  let notes = "";
+  let notes = null;
   let currentSection = null; // ingredients, steps, notes
   const tokens = md.parse(markdown ?? "", {});
 
@@ -22,15 +23,17 @@ const parseRecipe = (markdown: string | undefined) => {
 
     // Description
     else if (t.type === "paragraph_open" && !currentSection) {
-      description = description.concat(tokens[i + 1].content, "\r\n\r\n");
+      if (description === null)
+        description = tokens[i + 1].content + "\r\n\r\n";
+      else description = description.concat(tokens[i + 1].content, "\r\n\r\n");
     }
 
     // Sections
     else if (t.type === "heading_open" && t.tag === "h2") {
       const section = tokens[i + 1].content.toLowerCase();
 
-      if (section.includes("ingrédient")) currentSection = "ingredients";
-      else if (section.includes("préparation")) currentSection = "steps";
+      if (section.includes("ingredients")) currentSection = "ingredients";
+      else if (section.includes("instructions")) currentSection = "steps";
       else currentSection = "notes";
     }
 
@@ -46,7 +49,8 @@ const parseRecipe = (markdown: string | undefined) => {
 
     // Notes
     else if (currentSection === "notes" && t.type === "paragraph_open") {
-      notes = notes.concat(tokens[i + 1].content, "\r\n\r\n");
+      if (notes === null) notes = tokens[i + 1].content + "\r\n\r\n";
+      else notes = notes.concat(tokens[i + 1].content, "\r\n\r\n");
     }
   }
 

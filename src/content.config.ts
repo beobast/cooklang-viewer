@@ -50,9 +50,6 @@ const recipes = defineCollection({
 
 const recipes = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./recipes/" }),
-  schema: z.object({
-    title: z.string(),
-  }),
 });
 // 5. Export a single `collections` object to register your collection(s)
 export const collections = { recipes };
