@@ -51,5 +51,20 @@ const recipes = defineCollection({
 const recipes = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./recipes/" }),
 });
+
+const countries = defineCollection({
+  loader: async () => {
+    const recipes = Object.values(
+      import.meta.glob("/recipes/**/*.md", { eager: true }),
+    );
+
+    recipes.map((r) => console.log(r.url));
+
+    // Must return an array of entries with an id property
+    // or an object with IDs as keys and entries as values
+    return [{ id: "toto" }];
+  },
+});
+
 // 5. Export a single `collections` object to register your collection(s)
-export const collections = { recipes };
+export const collections = { recipes, countries };

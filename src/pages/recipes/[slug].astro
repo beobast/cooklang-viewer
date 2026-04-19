@@ -11,8 +11,13 @@ export async function getStaticPaths() {
         props: { recipe },
     }));
 }
+
+const recipes2 = Object.values(
+    import.meta.glob("/recipes/*.md", { eager: true }),
+);
 ---
 
 <Layout>
+    {recipes2.map((r) => <p>{r.url}</p>)}
     <Recipe recipe={parseRecipe(Astro.props.recipe.body)} />
 </Layout>
