@@ -1,12 +1,7 @@
-// 1. Import utilities from `astro:content`
 import { defineCollection } from "astro:content";
-//import { Recipe } from "recipemd";
-
-// 2. Import loader(s)
-import { glob } from "astro/loaders";
-
-// 3. Import Zod
-import { z } from "astro/zod";
+import type { MarkdownInstance } from "astro";
+import slugify from "@sindresorhus/slugify";
+import parseRecipe from "@/lib/RecipeParser";
 
 // Fetch from github repo
 /*
@@ -49,22 +44,26 @@ const recipes = defineCollection({
 */
 
 const recipes = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./recipes/" }),
-});
-
-const countries = defineCollection({
-  loader: async () => {
+  loader: () => {
+    // https://docs.astro.build/en/guides/markdown-content/#importing-markdown
     const recipes = Object.values(
-      import.meta.glob("/recipes/**/*.md", { eager: true }),
+      import.meta.glob<MarkdownInstance<Record<string, any>>>(
+        "/recipes/**/*.md",
+        { eager: true },
+      ),
     );
-
-    recipes.map((r) => console.log(r.url));
 
     // Must return an array of entries with an id property
     // or an object with IDs as keys and entries as values
-    return [{ id: "toto" }];
+    return recipes.map((recipe) => {
+      const parsedRecipe = parseRecipe(recipe.rawContent());
+      return {
+        id: slugify(parsedRecipe.title),
+        ...parseRecipe(recipe.rawContent()),
+      };
+    });
   },
 });
 
 // 5. Export a single `collections` object to register your collection(s)
-export const collections = { recipes, countries };
+export const collections = { recipes };

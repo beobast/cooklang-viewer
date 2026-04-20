@@ -57,6 +57,8 @@ const parseRecipe = (markdown: string | undefined): Recipe => {
   ingredients.shift();
   instructions.shift();
 
+  if (title === null) throw new Error("No title found");
+
   return {
     title,
     description,

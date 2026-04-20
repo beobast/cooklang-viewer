@@ -32,7 +32,7 @@ const Tags = ({ tags }: { tags: string[] }) => {
 
 const Instructions = ({ instructions }: { instructions: string[] }) => {
   return (
-    <ol className="text-[#356859] text-base list-none px-0 my-0">
+    <ol className="text-[#356859] text-base px-0 my-0">
       {instructions.map((instruction, index) => (
         <li key={index}>{instruction}</li>
       ))}
@@ -49,7 +49,7 @@ const Ingredients = ({ ingredients }: { ingredients: string[] }) => {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <ul className="text-base list-none px-0 my-0">
+        <ul className={`text-base px-4 my-0 list-["-"]`}>
           {ingredients.map((ingredient, index) => (
             <li key={index}>{ingredient}</li>
           ))}

@@ -2,7 +2,6 @@
 import Layout from "@/layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import Recipe from "@/components/RecipeView";
-import parseRecipe from "@/lib/RecipeParser";
 
 export async function getStaticPaths() {
     const recipes = await getCollection("recipes");
@@ -11,13 +10,8 @@ export async function getStaticPaths() {
         props: { recipe },
     }));
 }
-
-const recipes2 = Object.values(
-    import.meta.glob("/recipes/*.md", { eager: true }),
-);
 ---
 
 <Layout>
-    {recipes2.map((r) => <p>{r.url}</p>)}
-    <Recipe recipe={parseRecipe(Astro.props.recipe.body)} />
+    <Recipe recipe={Astro.props.recipe.data} />
 </Layout>

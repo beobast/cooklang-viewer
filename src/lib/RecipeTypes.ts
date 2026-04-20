@@ -1,5 +1,5 @@
 interface Recipe {
-  title: string | null;
+  title: string;
   description: string | null;
   ingredients: string[];
   instructions: string[];
