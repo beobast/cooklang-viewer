@@ -9,6 +9,7 @@ Formats:
 - [h-recipe](https://microformats.org/wiki/h-recipe)
 - [Schema.org Recipe Type](https://schema.org/Recipe)
 
-Parsing recipe from URL
+## Parsing recipe from URL
 
-Put cook.md/ before the url
+- Put cook.md/ before the url
+- [Plain old recipe](https://plainoldrecipe.com/)
