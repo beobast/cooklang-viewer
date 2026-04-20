@@ -2,7 +2,11 @@
 
 Courte description
 
-*servings 4*
+## Info
+- Pour 4 personnes
+- Préparation : 10 minutes
+- Cuisson : 5 minutes
+- Repos : 1 h
 
 ## Ingredients
 

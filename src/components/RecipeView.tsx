@@ -6,13 +6,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 const md = markdownit({ linkify: true });
 
 const Title = ({ title }: { title: string | null }) => {
-  return <h1 className="text-[#FD5523]">{title}</h1>;
+  return <h1 className="text-[#FD5523] text-3xl font-bold">{title}</h1>;
 };
 
 const Description = ({ description }: { description: string | null }) => {
   return description ? (
     <div
-      className="text-[#356859]"
+      className="text-[#356859] mt-2"
       dangerouslySetInnerHTML={{ __html: md.render(description) }}
     ></div>
   ) : null;
@@ -32,11 +32,19 @@ const Tags = ({ tags }: { tags: string[] }) => {
 
 const Instructions = ({ instructions }: { instructions: string[] }) => {
   return (
-    <ol className="text-[#356859] text-base px-0 my-0">
-      {instructions.map((instruction, index) => (
-        <li key={index}>{instruction}</li>
-      ))}
-    </ol>
+    <div>
+      <h2 className="text-xl font-semibold text-gray-800 mb-3 border-b pb-1">
+        Instructions
+      </h2>
+
+      <ol className="text-[#356859] text-base px-0 my-0 space-y-4">
+        {instructions.map((instruction, index) => (
+          <li key={index} className="leading-relaxed">
+            {instruction}
+          </li>
+        ))}
+      </ol>
+    </div>
   );
 };
 
@@ -49,7 +57,7 @@ const Ingredients = ({ ingredients }: { ingredients: string[] }) => {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <ul className={`text-base px-4 my-0 list-["-"]`}>
+        <ul className={`text-base px-4 my-0 list-["-"] space-y-2`}>
           {ingredients.map((ingredient, index) => (
             <li key={index}>{ingredient}</li>
           ))}
@@ -61,7 +69,7 @@ const Ingredients = ({ ingredients }: { ingredients: string[] }) => {
 
 const RecipeView = ({ recipe }: { recipe: Recipe }) => {
   return (
-    <div className="prose mx-auto">
+    <div className="prose max-w-2xl mx-auto bg-white shadow-lg rounded-2xl p-6 space-y-6">
       <Title title={recipe.title} />
       <Description description={recipe.description} />
       <div className="flex gap-4 flex-col">
