@@ -48,7 +48,7 @@ const recipes = defineCollection({
     // https://docs.astro.build/en/guides/markdown-content/#importing-markdown
     const recipes = Object.values(
       import.meta.glob<MarkdownInstance<Record<string, any>>>(
-        "/recipes/**/*.md",
+        "/src/recipes/**/*.md",
         { eager: true },
       ),
     );
@@ -59,6 +59,7 @@ const recipes = defineCollection({
       const parsedRecipe = parseRecipe(recipe.rawContent());
       return {
         id: slugify(parsedRecipe.title),
+        filePath: recipe.file,
         ...parseRecipe(recipe.rawContent()),
       };
     });
