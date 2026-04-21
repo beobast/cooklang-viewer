@@ -1,0 +1,22 @@
+---
+import type { Recipe } from "@/lib/RecipeTypes";
+import markdownit from "markdown-it";
+
+interface Props {
+  recipe: Recipe;
+}
+
+const { recipe } = Astro.props;
+const md = markdownit({ linkify: true });
+---
+
+<div class="max-w-3xl mx-auto shadow-lg rounded-2xl p-6 space-y-6">
+  <h1>{recipe.title}</h1>
+  {recipe.description && <Fragment set:html={md.render(recipe.description)} />}
+  <ul class="list-disc space-y-1 ml-4">
+    {recipe.ingredients.map((ingredient) => <li>{ingredient}</li>)}
+  </ul>
+  <ol class="list-decimal space-y-4 ml-4">
+    {recipe.instructions.map((instruction) => <li>{instruction}</li>)}
+  </ol>
+</div>

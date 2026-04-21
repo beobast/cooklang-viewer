@@ -1,0 +1,11 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  recipe: CollectionEntry<"recipes">;
+}
+
+const { recipe } = Astro.props;
+---
+
+<a href={`recipes/${recipe.id}`}>{recipe.data.title}</a>

@@ -1,12 +1,12 @@
 ---
-import RecipeCard from "@/components/RecipeCard";
+import RecipeCard from "@/components/RecipeCard.astro";
 import Layout from "@/layouts/Layout.astro";
 import { getCollection } from "astro:content";
 const recipes = await getCollection("recipes");
 ---
 
 <Layout>
-    <div class="flex flex-col gap-2 sm:gap-4 max-w-xl mx-auto">
-        {recipes.map((recipe) => <RecipeCard recipe={recipe} />)}
-    </div>
+  <div class="flex flex-col gap-2 sm:gap-4 max-w-xl mx-auto">
+    {recipes.map((recipe) => <RecipeCard recipe={recipe} />)}
+  </div>
 </Layout>
