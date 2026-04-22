@@ -55,14 +55,16 @@ const recipes = defineCollection({
 
     // Must return an array of entries with an id property
     // or an object with IDs as keys and entries as values
-    return recipes.map((recipe) => {
-      const parsedRecipe = parseRecipe(recipe.rawContent());
-      return {
-        id: slugify(parsedRecipe.title),
-        filePath: recipe.file,
-        ...parsedRecipe,
-      };
-    });
+    return recipes
+      .filter((recipe) => !recipe.file.endsWith("template.md"))
+      .map((recipe) => {
+        const parsedRecipe = parseRecipe(recipe.rawContent());
+        return {
+          id: slugify(parsedRecipe.title),
+          filePath: recipe.file,
+          ...parsedRecipe,
+        };
+      });
   },
 });
 

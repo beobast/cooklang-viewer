@@ -15,6 +15,7 @@
     "@sindresorhus/slugify": "^3.0.0",
     "@tailwindcss/vite": "^4.2.2",
     "astro": "^6.1.4",
+    "astro-pagefind": "^1.8.6",
     "markdown-it": "^14.1.1",
     "tailwindcss": "^4.2.2"
   },
