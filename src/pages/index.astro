@@ -1,14 +1,15 @@
 ---
 import RecipeCard from "@/components/RecipeCard.astro";
-import { Image } from "astro:assets";
 import Layout from "@/layouts/Layout.astro";
 import { getCollection } from "astro:content";
 const recipes = await getCollection("recipes");
+const images = await getCollection("images");
 ---
 
 <Layout>
-  <Image src={import("../recipes/sauce/mayonnaise.jpg")} alt="" />
   <div class="flex flex-col gap-2 sm:gap-4 max-w-xl mx-auto">
     {recipes.map((recipe) => <RecipeCard recipe={recipe} />)}
+    {images.map((image) => <p>{image.id}</p>)}
+    {recipes.map((recipe) => <p>{recipe.data.filePath}</p>)}
   </div>
 </Layout>

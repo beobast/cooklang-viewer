@@ -60,11 +60,31 @@ const recipes = defineCollection({
       return {
         id: slugify(parsedRecipe.title),
         filePath: recipe.file,
-        ...parseRecipe(recipe.rawContent()),
+        ...parsedRecipe,
+      };
+    });
+  },
+});
+
+const images = defineCollection({
+  loader: () => {
+    // https://docs.astro.build/en/guides/markdown-content/#importing-markdown
+    const images = Object.values(
+      import.meta.glob<{ default: ImageMetadata }>("/src/recipes/**/*.jpg", {
+        eager: true,
+      }),
+    );
+
+    // Must return an array of entries with an id property
+    // or an object with IDs as keys and entries as values
+    return images.map((image) => {
+      return {
+        id: image.default.src,
+        ...image,
       };
     });
   },
 });
 
 // 5. Export a single `collections` object to register your collection(s)
-export const collections = { recipes };
+export const collections = { recipes, images };
