@@ -4,27 +4,19 @@ import { getCollection } from "astro:content";
 import RecipeView from "@/components/RecipeView.astro";
 import { getRecipeImage } from "@/lib/utils";
 
-const recipes = await getCollection("recipes");
-recipes.map((recipe) => getRecipeImage(recipe.data.filePath));
-
 export async function getStaticPaths() {
   const recipes = await getCollection("recipes");
-  const images = await getCollection("images");
 
-  return recipes.map((recipe) => {
-    //https://jankraus.net/2024/04/05/how-to-build-a-simple-photo-gallery-with-astro/
-    const image = images.find((img) =>
-      img.id.includes(recipe.data.filePath.replace(/md$/, "jpg")),
-    );
-
-    return {
-      params: { slug: recipe.id },
-      props: { recipe, image },
-    };
-  });
+  return recipes.map((recipe) => ({
+    params: { slug: recipe.id },
+    props: { recipe },
+  }));
 }
+
+const { recipe } = Astro.props;
+const image = await getRecipeImage(recipe.data.filePath);
 ---
 
 <Layout>
-  <RecipeView recipe={Astro.props.recipe.data} />
+  <RecipeView recipe={recipe.data} image={image} />
 </Layout>

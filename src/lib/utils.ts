@@ -1,25 +1,20 @@
+// https://jankraus.net/2024/04/05/how-to-build-a-simple-photo-gallery-with-astro/
 export async function getRecipeImage(recipeFilePath: string | undefined) {
-  if (!recipeFilePath) return null;
+  if (recipeFilePath === undefined) return null;
 
   // 1. List all images from recipes path
-  let images = import.meta.glob<{ default: ImageMetadata }>(
-    "/src/recipes/**/*.{jpeg,jpg}",
+  const images = import.meta.glob<{ default: ImageMetadata }>(
+    "/recipes/**/*.{jpeg,jpg,png}",
   );
 
-  console.log(Object.entries(images));
-
-  // 2. Filter images by albumId
-  images = Object.fromEntries(
-    Object.entries(images).filter(([key]) => key.includes("mayo")),
+  // 2. Find recipe image
+  // Remove file extension from image path then compare with recipeFilePath
+  const image = Object.entries(images).find((image) =>
+    recipeFilePath.includes(image[0].replace(/\.[^/.]+$/, "")),
   );
 
-  // 3. Images are promises, so we need to resolve the glob promises
-  /*const resolvedImages = await Promise.all(
-    Object.values(images).map((image) => image().then((mod) => mod.default)),
-  );*/
+  if (image === undefined) return null;
 
-  // 4. Shuffle images in random order
-  /*resolvedImages.sort(() => Math.random() - 0.5);
-  return resolvedImages;*/
-  return [];
+  // 3. Resolve image promise and return ImageMetadata
+  return await image[1]().then((mod) => mod.default);
 }

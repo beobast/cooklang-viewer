@@ -5,16 +5,23 @@ import markdownit from "markdown-it";
 
 interface Props {
   recipe: Recipe;
+  image: ImageMetadata | null;
 }
 
-const { recipe } = Astro.props;
+const { recipe, image } = Astro.props;
 const md = markdownit({ linkify: true });
 ---
 
 <div class="max-w-2xl mx-auto shadow-lg rounded-2xl p-8 space-y-6">
+  {
+    image && (
+      <Image src={image} alt={recipe.title} quality="low" class="rounded-xl" />
+    )
+  }
   <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
     {recipe.title}
   </h1>
+
   {recipe.description && <Fragment set:html={md.render(recipe.description)} />}
   <h2
     class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3 border-b pb-1"
