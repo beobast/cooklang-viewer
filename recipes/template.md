@@ -2,9 +2,8 @@
 
 Description de la recette
 
-## Info
+## Pour X personnes
 
-- Pour X personnes
 - Préparation : X minutes
 - Cuisson : X minutes
 - Repos : X minutes
@@ -15,10 +14,11 @@ Description de la recette
 - ingrédient 2
 - ingrédient 3
 
-## Instructions
+## Préparation
 
 1. étape 1
 2. étape 2
+3. étape 3
 
 ## Notes
 

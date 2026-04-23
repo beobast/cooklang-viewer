@@ -1,16 +1,36 @@
 import markdownit from "markdown-it";
-import type { Recipe } from "@/lib/RecipeTypes";
+import type { Servings, Recipe } from "@/lib/RecipeTypes";
 
 const md = markdownit();
 
+// "Pour 4 personnes" --> { amount: 4, unit: "personnes" }
+const parseServings = (line: string): Servings => {
+  const splitLine = line.split(" ");
+  return {
+    amount: parseFloat(splitLine[1]),
+    unit: splitLine[2],
+  };
+};
+
+// "Préparation : 15 minutes" --> "15 minutes"
+const parseTime = (line: string): string => {
+  return line.split(":")[1].trim();
+};
+
 const parseRecipe = (markdown: string | undefined): Recipe => {
+  if (markdown === undefined) throw new Error("Recipe is undefined");
+
   let title = null;
   let description = null;
   let ingredients = [];
   let instructions = [];
   let notes = null;
-  let currentSection = null; // ingredients, steps, notes
-  const tokens = md.parse(markdown ?? "", {});
+  let currentSection = null; // info, ingredients, steps, notes
+  let servings = null;
+  let prepTime = null;
+  let cookTime = null;
+
+  const tokens = md.parse(markdown, {});
 
   for (let i = 0; i < tokens.length; i++) {
     const t = tokens[i];
@@ -31,10 +51,17 @@ const parseRecipe = (markdown: string | undefined): Recipe => {
     // Sections
     else if (t.type === "heading_open" && t.tag === "h2") {
       const section = tokens[i + 1].content.toLowerCase();
-
-      if (section.includes("ingredients")) currentSection = "ingredients";
-      else if (section.includes("instructions")) currentSection = "steps";
+      if (section.includes("pour ")) currentSection = "info";
+      else if (section.includes("ingrédients")) currentSection = "ingredients";
+      else if (section.includes("préparation")) currentSection = "steps";
       else currentSection = "notes";
+    }
+
+    // Info
+    else if (currentSection === "info" && t.type === "inline") {
+      if (servings === null) servings = parseServings(t.content);
+      else if (prepTime === null) prepTime = parseTime(t.content);
+      else if (cookTime === null) cookTime = parseTime(t.content);
     }
 
     // Ingredients
@@ -62,6 +89,9 @@ const parseRecipe = (markdown: string | undefined): Recipe => {
   return {
     title,
     description,
+    servings,
+    prepTime,
+    cookTime,
     ingredients,
     instructions,
     notes,

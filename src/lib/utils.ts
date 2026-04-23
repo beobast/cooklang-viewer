@@ -4,7 +4,7 @@ export async function getRecipeImage(recipeFilePath: string | undefined) {
 
   // 1. List all images from recipes path
   const images = import.meta.glob<{ default: ImageMetadata }>(
-    "/recipes/**/*.{jpeg,jpg,png}",
+    "/recipes/**/*.{jpeg,jpg,png,webp}",
   );
 
   // 2. Find recipe image

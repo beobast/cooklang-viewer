@@ -12,31 +12,60 @@ const { recipe, image } = Astro.props;
 const md = markdownit({ linkify: true });
 ---
 
-<div class="max-w-2xl mx-auto shadow-lg rounded-2xl p-8 space-y-6">
+<div class="max-w-2xl mx-auto shadow-lg rounded-2xl p-4 space-y-6 md:my-8">
   {
     image && (
       <Image src={image} alt={recipe.title} quality="low" class="rounded-xl" />
     )
   }
-  <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
+  <h1 class="text-3xl font-bold text-gray-900">
     {recipe.title}
   </h1>
 
   {recipe.description && <Fragment set:html={md.render(recipe.description)} />}
-  <h2
-    class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3 border-b pb-1"
-  >
+
+  {
+    recipe.servings && (
+      <div>
+        <p class="font-semibold">
+          Pour {recipe.servings?.amount} {recipe.servings?.unit}
+        </p>
+        {recipe.prepTime && (
+          <p>
+            <b class="font-semibold">Préparation : </b>
+            {recipe.prepTime}
+          </p>
+        )}
+        {recipe.cookTime && (
+          <p>
+            <b class="font-semibold">Cuisson : </b>
+            {recipe.cookTime}
+          </p>
+        )}
+      </div>
+    )
+  }
+
+  <h2 class="text-xl font-semibold text-gray-800 mb-3 border-b pb-1">
     Ingrédients
   </h2>
   <ul class="list-disc space-y-1 ml-4">
     {recipe.ingredients.map((ingredient) => <li>{ingredient}</li>)}
   </ul>
-  <h2
-    class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3 border-b pb-1"
-  >
+  <h2 class="text-xl font-semibold text-gray-800 mb-3 border-b pb-1">
     Instructions
   </h2>
   <ol class="list-decimal space-y-4 ml-4">
     {recipe.instructions.map((instruction) => <li>{instruction}</li>)}
   </ol>
+  {
+    recipe.notes && (
+      <>
+        <h2 class="text-xl font-semibold text-gray-800 mb-3 border-b pb-1">
+          Notes
+        </h2>
+        <Fragment set:html={md.render(recipe.notes)} />
+      </>
+    )
+  }
 </div>

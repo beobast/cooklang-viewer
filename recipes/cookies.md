@@ -1,6 +1,11 @@
 # Cookies
 
-## Ingredients
+## Pour 4 personnes
+
+- Préparation : 15 minutes
+- Cuisson : 10 minutes
+
+## Ingrédients
 
 - 85 g de beurre tendre
 - 1 oeuf
@@ -11,7 +16,7 @@
 - 1 bonnes pincées de sel
 - 1 cuillères à café de levure chimique
 
-## Instructions
+## Préparation
 
 1. Détailler le chocolat en pépites.
 2. Préchauffer le four à 180°C (thermostat 6). Dans un saladier, mettre 75 g de beurre, le sucre, l'oeuf entier, la vanille et mélanger le tout avec une cuillère en bois.
@@ -22,4 +27,4 @@
 
 ## Notes
 
-https://www.marmiton.org/recettes/recette_cookies-maison_86989.aspx
+[Source](https://www.marmiton.org/recettes/recette_cookies-maison_86989.aspx)
